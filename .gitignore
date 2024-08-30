@@ -1,0 +1,45 @@
+# Python-related
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+venv/
+env/
+.env
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Project-specific
+*.log
+*.sqlite3
+
+# API keys and sensitive information
+.env
+
+# Generated scripts
+*.py
+!scriptomatic.py
+!llm.py
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Miscellaneous
+.cache/
+.pytest_cache/

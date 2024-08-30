@@ -14,9 +14,6 @@ ANTHROPIC_MODEL = "claude-3-haiku-20240307"
 llm = dspy.OpenAI(model=OPENAI_MODEL,  max_tokens=4096, temperature=0.6)
 
 dspy.settings.configure(lm=llm)
-# Base prompt:
-# You are a master python cli script writer. The user will provide a prompt for what they want out of the script, your job is to think about how the implementation should work. Think about what the input parameters would be, what outputs it would make. Think deeply about the problem and task at hand. How can we create a script that would absolutely WOW the user. How can we provide that moment of magic for them? Let's think step by step. Begin by listing out the steps you would need to accomplish the perfect script. Then, provide a description of your proposed implementation, as well as the snake case script name, and a list of the outputs and parameters for this script.
-
 
 class Step(BaseModel):
     thought_process: str
@@ -29,9 +26,6 @@ class ScriptParts(BaseModel):
     script_name: str
     outputs: list[str]
     parameters: list[str]
-
-
-
 
     
 def generate_structured_output(enhanced_query):
@@ -66,8 +60,8 @@ Remember to be creative, thorough, and focus on creating a script that will trul
         script_name = message.parsed.script_name
         outputs = message.parsed.outputs
         parameters = message.parsed.parameters
-        print(f'''\nStructured Output:
-        Steps:''')
+        print(f'''\nGPT has thoughts: here are the steps it should take, parameters, outputs, and description:
+Steps:''')
         for i, step in enumerate(steps, 1):
             print(f'''
 Step {i}:
@@ -100,9 +94,6 @@ def openai_structured_output(system_prompt, user_prompt, data_model):
     )
     message = completion.choices[0].message
     if message.parsed:
-        # Print out every key-value pair in message.parsed
-        for key, value in message.parsed.items():
-            print(f"{key}: {value}")
         # Return the parsed message
         return message.parsed   
     else:
@@ -268,6 +259,8 @@ class RunCommand(BaseModel):
     
 
 def get_run_command(script_name, script_content):
+    if ".py" not in script_name:
+        script_name += ".py"
     
     system_prompt = f"""Your job is to create the command necessary to run the following script. Return the string of the one-line command necessary to run the script, in run_command. In addition, we need to know what pip libraries are needed, and return them in a one-line, CLI pip install command, like this:
     
