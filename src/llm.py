@@ -21,7 +21,11 @@ class ScriptIdea(BaseModel):
     description: str
     prompt: str
     
+class RunCommand(BaseModel):
+    run_command: str
+    pip_install_command: str
     
+
 class LLMProvider:
     def __init__(self, model: str = DEFAULT_OPENAI_MODEL, temperature: float = 0.6):
         self.openai_client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
@@ -256,6 +260,37 @@ Remember, you have full creative freedom to design and implement the script as y
             temperature=self.temperature
         )
         return response.choices[0].message.content
+    
+
+    def get_run_command(self,script_name, script_content):
+        if ".py" not in script_name:
+            script_name += ".py"
+        
+        system_prompt = f"""Your job is to create the command necessary to run the following script. Return the string of the one-line command necessary to run the script, in run_command. In addition, we need to know what pip libraries are needed, and return them in a one-line, CLI pip install command, like this:
+        
+        pip install matplotlib pandas numpy 
+        
+        The run_command should be a one-line command that can be run in the terminal, and should include the name of the script you are generating. The script name should be {script_name}.
+        Here are some examples of run commands:
+        
+        python {script_name}
+        
+        python {script_name} --arg1 arg1 --arg2 arg2
+        
+        python {script_name} --text "Hello, world!"
+        
+        Obviously, the command should be specific to the script you are generating, and should not include any other commands that are not necessary to run the script.
+        
+        
+        The user will provide you with the script content. Remember to provide the run_command and pip_install_command in the response."""
+        
+        
+        result = self.openai_structured_output(system_prompt, script_content, RunCommand)
+        pip_install_command = result.pip_install_command
+        run_command = result.run_command
+        
+        return run_command, pip_install_command
+        
 
 
 class QueryEnhancerGenerator(dspy.Signature):
