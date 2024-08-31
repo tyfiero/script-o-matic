@@ -32,10 +32,7 @@ Thumbs.db
 # API keys and sensitive information
 .env
 
-# Generated scripts
-*.py
-!scriptomatic.py
-!llm.py
+
 
 # Jupyter Notebooks
 .ipynb_checkpoints/

@@ -1,17 +1,33 @@
 [tool.poetry]
 name = "scriptomatic"
-version = "0.1.0"
-description = "A tool to generate custom Python scripts"
-authors = ["Your Name <your.email@example.com>"]
+version = "1.0.1"
+description = "A cli tool to generate custom Python scripts"
+authors = ["Ty Fiero <tyfierodev@gmail.com>"]
+readme = "README.md"
+license = "MIT"
+homepage = "https://github.com/tyfiero/scriptomatic"
+repository = "https://github.com/tyfiero/scriptomatic"
+keywords = ["script", "generator", "ai", "tool-use"]
+packages = [{include = "src"}]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-anthropic = "^0.3.0"
+python = "^3.11"
+anthropic = "*"
+dspy = "*"
+openai = "*"
+pydantic = "*"
+prompt_toolkit = "*"
 
 [tool.poetry.scripts]
-scriptomatic = "scriptomatic:main"
-plz = "scriptomatic:plz"
+scriptomatic = "src.cli:cli"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
