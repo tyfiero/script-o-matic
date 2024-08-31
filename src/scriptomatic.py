@@ -15,6 +15,7 @@ class Scriptomatic:
 
     def generate_script(self, prompt: str, loop: bool = False, autoloop: bool = False) -> str:
         enhanced_prompt = self.llm.enhance_query(prompt)
+        
         script_name, parameters, outputs, description = self.llm.generate_structured_script_components(enhanced_prompt)
         script_content = self.llm.generate_script_content(prompt, script_name, parameters, outputs, description)
         
@@ -23,9 +24,6 @@ class Scriptomatic:
         
         return self._save_script(script_name, script_content)
 
-
-    def generate_script_content(self, prompt: str, script_name: str, parameters: List[str], outputs: List[str], description: str) -> str:
-        return self.llm.generate_script(prompt, script_name, parameters, outputs, description)
 
     def _iterate_script(self, script_content: str, description: str, parameters: List[str], outputs: List[str], autoloop: bool) -> str:
         while True:
@@ -91,7 +89,6 @@ class Scriptomatic:
         if pip_packages:
             print(f"\n\033[94mInstalling required packages:\n\033[0m")
             print(f"\033[1;94m{', '.join(pip_packages)}\n\033[0m")
-            print(f"\n\033[94mInstalling required packages...\033[0m")
             success, error_message = self.install_packages(pip_packages)
             if not success:
                 print(f"\033[91mFailed to install packages. Error: {error_message}\033[0m")

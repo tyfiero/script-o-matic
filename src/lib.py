@@ -16,6 +16,7 @@ def rainbow_print(text):
 
 
 def clean_up_code(code):
+    # This might not even be needed anymore, this was when it was claude creating the code
     # Find the start of the markdown codeblock
     start = code.find("```")
     if start == -1:

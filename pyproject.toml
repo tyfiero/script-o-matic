@@ -24,6 +24,7 @@ dspy = "*"
 openai = "*"
 pydantic = "*"
 prompt_toolkit = "*"
+pytest = "*"
 
 [tool.poetry.scripts]
 scriptomatic = "src.cli:cli"

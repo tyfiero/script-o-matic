@@ -33,10 +33,14 @@ class LLMProvider:
         self.query_enhancer = QueryEnhancer()
 
     def enhance_query(self, query: str) -> str:
+        print("\nEnhancing your prompt...\n")
         result = self.query_enhancer(query=query)
+        print("Improved prompt:")
+        print(result.enhanced_query)
         return result.enhanced_query
 
     def generate_structured_script_components(self, enhanced_query: str) -> Tuple[str, List[str], List[str], str]:
+        print("Generating script components...\n")
         system_prompt = f"""
     You are a master Python CLI script writer tasked with creating an exceptional script based on a user's prompt. Your goal is to think deeply about the implementation, considering input parameters, outputs, and how to create a truly impressive script that will wow the user.
 
@@ -112,6 +116,7 @@ class LLMProvider:
         result = self.openai_structured_output(system_prompt, user_prompt, ScriptIdeasResult)
         return result.ideas
     def update_description(self, old_description, failed_script, user_feedback=None):
+        print("\nImproving script description...\n")
         system_prompt = "You are an AI assistant tasked with improving a Python script description based on a failed implementation."
         user_prompt = f"""
         Original description: {old_description}
@@ -133,6 +138,8 @@ class LLMProvider:
             description: str
         
         result = self.openai_structured_output(system_prompt, user_prompt, UpdatedDescription)
+        print("Improved description:")
+        print(result.description)
         return result.description
     
     def openai_structured_output(self,system_prompt, user_prompt, data_model):
@@ -178,6 +185,7 @@ class LLMProvider:
         return result.success
     
     def analyze_pip_error(self, packages, error_output):
+        print("\nAnalyzing pip error, and suggesting fixes...\n")
         system_prompt = """You are an AI assistant specialized in Python package management and pip errors. 
         Analyze the given list of packages and the error output, then suggest fixes or explain why they can't be fixed."""
 
@@ -201,6 +209,7 @@ class LLMProvider:
         return result.fixed_packages
 
     def generate_script_content(self, prompt: str, script_name: str, parameters: List[str], outputs: List[str], description: str) -> str:
+        print("\nGenerating script content...\n")
         system_prompt = f"""You are a master Python script writer tasked with creating a script based on the given information. Your goal is to write a complete, functional Python script that meets the specified requirements and incorporates creative elements. ONLY output the code content of the script you create. Follow these instructions carefully:
 
 
