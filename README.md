@@ -4,19 +4,18 @@ Welcome to Script-O-Matic, your friendly neighborhood Python script generator! �
 
 ## 🎯 What is Script-O-Matic?
 
-Script-O-Matic is a CLI tool that turns your ideas into fully-functional Python scripts. It uses structured output from the OpenAI API to generate scripts that are both creative and functional, as well as DSPy to refine your query to make it more specific and actionable. Check out the /example-scripts folder for some examples of what Script-O-Matic can make, feel free to add to it.
+Script-O-Matic is a CLI tool that turns your ideas into fully functional Python scripts. It uses structured output from the OpenAI API to generate scripts that are both creative and functional, as well as DSPy to refine your query to make it more specific and actionable. Check out the /example-scripts folder for some examples of what Script-O-Matic can make, feel free to add to it.
 
 ## 🚀 Features
 
-Generate custom Python scripts based on your prompts
-Get inspiration for script ideas with `--inspo`
-Automatic package installation
-Interactive mode for script refinement
-Powered by the latest AI models
+- Generate custom Python scripts based on your prompts
+- Get inspiration for script ideas with `--inspo`
+- Automatic package installation
+- Interactive mode for script refinement
 
 ## 🛠 Installation
 
-First, make sure you have Python 3.11 or later installed. Then, you can install Script-O-Matic using pip:
+First, make sure you have installed Python 3.11 or later. Then, you can install Script-O-Matic using pip:
 
 ```bash
 pip install scriptomatic
@@ -76,7 +75,7 @@ scriptomatic "Calculate prime numbers" --autoloop
 
 ### Python Usage
 
-The Scriptomatic class can be imported and used in your Python scripts, and has a whole host of methods for generating scripts and getting inspiration. Everything in the project is modular and extensible, so you can customize Script-O-Matic to your heart's content.
+The Scriptomatic class can be imported and used in your Python scripts and has a whole host of methods for generating scripts and getting inspiration. Everything in the project is modular and extensible, so you can customize Script-O-Matic to your heart's content.
 
 ```python
 from scriptomatic import Scriptomatic
@@ -88,7 +87,7 @@ scriptomatic.generate_script("Create a script that builds scripts")
 
 ## 🌟 Contributing
 
-Found a bug? Have an idea for an enchanting new feature? Let me know! Open an issue or submit a pull request here on GitHub.
+Found a bug? Do you have an idea for an enchanting new feature? Let me know! Open an issue or submit a pull request here on GitHub.
 
 ## 📜 License
 
